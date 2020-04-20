@@ -1,6 +1,7 @@
 const express = require('express'); //We bring in express
 const router = express.Router(); //We create router in order to use the express router
 const bcrypt = require('bcryptjs'); //Wr use it in order to encrypt the password
+const passport = require('passport'); //We need it for the login
 
 //User model
 const User = require('../models/User'); //We bring the User model we created
@@ -68,8 +69,9 @@ router.post('/register', (req, res) => {
                         //Set password to a hashed one
                         newUser.password = hash;
                         //Save user
-                        newUser.save()
+                        newUser.save()  //Stores the newly created user into Mongo
                         .then(user => {
+                            req.flash('succes_msg','You are now registered and loged in');
                             res.redirect('login');
                         })
                         .catch(err => console.log(err));
@@ -79,5 +81,21 @@ router.post('/register', (req, res) => {
     } 
 
 });//We are handling the post request from the register view
+
+//Login handle
+router.post('/login', (req,res,next) => {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
+        failureRedirect: '/users/login',
+        failureFlash: true
+    })(req, res, next);
+});
+
+//Logout handle
+router.get('/logout', (req,res) => {
+    req.logout();
+    req.flash('succes_msg', 'You are logged out');
+    res.redirect('/users/login');
+});
 
 module.exports = router; //Exports the path as a module
