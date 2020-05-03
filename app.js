@@ -50,6 +50,7 @@ app.use((req,res,next) => {
 // Routes
 app.use('/', require('./routes/index')); //We create tha main route
 app.use('/users', require('./routes/users')); //We create the users route
+app.use(express.static(__dirname + '/views')); //We need this to be able to add some css
 
 const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT for deployment)
 
