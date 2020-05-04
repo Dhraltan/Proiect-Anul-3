@@ -4,8 +4,14 @@ const mongoose = require('mongoose'); //We bring in mongoose(used for handling t
 const flash = require('connect-flash'); //We use connect flash to store up messages for a session and display them on another page(on a redirect)
 const session = require('express-session'); //It's a middleware that stores the session id in the cookie
 const passport = require('passport'); //We bring in passport
+const path = require('path'); //This brings in a path module from noje.js
+const http = require('http'); //We need http in order to use socket.io
+const socketio = require('socket.io'); //We bring in socket.io
 
 const app = express(); //We initialize the app with express
+
+const server = http.createServer(app); //We create a server with http
+const io = socketio(server);
 
 //Passport config
 require('./config/passport')(passport); //We initialize passport with our config
@@ -47,12 +53,25 @@ app.use((req,res,next) => {
     next();
 }); //We create our own middleware for messages
 
+// Run socket io when someoane connects
+io.on('connection', socket => {
+  socket.emit('message', 'Welcom to ChatApp!'); //We send a welcome message to the client
+
+  socket.broadcast.emit('message', 'A user has joined the chat'); //We emit to everybody except the user that is connecting
+
+  socket.on('disconnect', () => {
+    io.emit('message', 'A user has left the chat'); //We are emmiting the message to everyone
+  }); 
+});//The server side comunicates with the client side
+
 // Routes
 app.use('/', require('./routes/index')); //We create tha main route
 app.use('/users', require('./routes/users')); //We create the users route
-app.use(express.static(__dirname + '/views')); //We need this to be able to add some css
 
-const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT for deployment)
+//Set static folder
+app.use(express.static(path.join(__dirname + '/views'))); //We need this to be able to add some css
 
-app.listen(PORT, console.log(`Server started on port ${PORT}`)); //This runs a server
+const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT is for deployment)
+
+server.listen(PORT, console.log(`Server started on port ${PORT}`)); //This runs a server
 
