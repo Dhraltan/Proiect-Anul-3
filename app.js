@@ -7,6 +7,7 @@ const passport = require('passport'); //We bring in passport
 const path = require('path'); //This brings in a path module from noje.js
 const http = require('http'); //We need http in order to use socket.io
 const socketio = require('socket.io'); //We bring in socket.io
+const formatMessage = require('./models/messages');
 
 const app = express(); //We initialize the app with express
 
@@ -53,15 +54,22 @@ app.use((req,res,next) => {
     next();
 }); //We create our own middleware for messages
 
+const botName = 'ChatBot';
+
 // Run socket io when someoane connects
 io.on('connection', socket => {
-  socket.emit('message', 'Welcom to ChatApp!'); //We send a welcome message to the client
+  socket.emit('message', formatMessage(botName, 'Welcom to ChatApp!')); //We send a welcome message to the client
 
-  socket.broadcast.emit('message', 'A user has joined the chat'); //We emit to everybody except the user that is connecting
+  socket.broadcast.emit('message', formatMessage(botName, 'A user has joined the chat')); //We emit to everybody except the user that is connecting
 
   socket.on('disconnect', () => {
-    io.emit('message', 'A user has left the chat'); //We are emmiting the message to everyone
+    io.emit('message', formatMessage(botName, 'A user has left the chat')); //We are emmiting the message to everyone
   }); 
+
+  // Listen for chat messages
+  socket.on('chatMessage', (msg) => {
+    io.emit('message', formatMessage('name', msg));
+  })
 });//The server side comunicates with the client side
 
 // Routes
