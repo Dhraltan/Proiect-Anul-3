@@ -1,5 +1,5 @@
 <h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3" id="name">Welcome <%= name %></p>
+<p class="lead mb-3" id="name"><%= name %></p>
 <a href="/users/logout" class="btn btn-secondary">Logout</a>
 
 <head>
@@ -45,6 +45,7 @@
       </form>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha256-ijqLssetA1NMNjZ+w1zaUafQQLm4IW5OoM8O+4tatME=" crossorigin="anonymous"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/front.js"></script>
 </body>

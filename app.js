@@ -9,6 +9,7 @@ const http = require('http'); //We need http in order to use socket.io
 const socketio = require('socket.io'); //We bring in socket.io
 const formatMessage = require('./models/messages');
 
+
 const app = express(); //We initialize the app with express
 
 const server = http.createServer(app); //We create a server with http
@@ -54,22 +55,28 @@ app.use((req,res,next) => {
     next();
 }); //We create our own middleware for messages
 
+//Create a const for the Bot that sends automated messages
 const botName = 'ChatBot';
 
 // Run socket io when someoane connects
 io.on('connection', socket => {
-  socket.emit('message', formatMessage(botName, 'Welcom to ChatApp!')); //We send a welcome message to the client
+socket.on('joinRoom', ({room,name}) => {
+  socket.join(room);
 
-  socket.broadcast.emit('message', formatMessage(botName, 'A user has joined the chat')); //We emit to everybody except the user that is connecting
+  socket.emit('message', formatMessage(botName, 'Welcome to ChatApp!')); //We send a welcome message to the client
+
+  socket.broadcast.emit('message', formatMessage(botName, `A ${name} has joined the chat`)); //We emit to everybody except the user that is connecting
+});
+
+  // Listen for chat messages
+  socket.on('chatMessage', (msg) => {
+    io.emit('message', formatMessage('name', msg));
+  }) 
 
   socket.on('disconnect', () => {
     io.emit('message', formatMessage(botName, 'A user has left the chat')); //We are emmiting the message to everyone
   }); 
 
-  // Listen for chat messages
-  socket.on('chatMessage', (msg) => {
-    io.emit('message', formatMessage('name', msg));
-  })
 });//The server side comunicates with the client side
 
 // Routes
