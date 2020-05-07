@@ -7,8 +7,8 @@ const passport = require('passport'); //We bring in passport
 const path = require('path'); //This brings in a path module from noje.js
 const http = require('http'); //We need http in order to use socket.io
 const socketio = require('socket.io'); //We bring in socket.io
-const formatMessage = require('./models/messages');
-
+const formatMessage = require('./models/messages'); // We use a format for our messages
+const { createLink, getLink, destroyLink, getRoomUsers } = require('./models/links')
 
 const app = express(); //We initialize the app with express
 
@@ -61,20 +61,29 @@ const botName = 'ChatBot';
 // Run socket io when someoane connects
 io.on('connection', socket => {
 socket.on('joinRoom', ({room,name}) => {
-  socket.join(room);
+
+  const link = createLink(socket.id, name, room);
+  socket.join(link.room);
 
   socket.emit('message', formatMessage(botName, 'Welcome to ChatApp!')); //We send a welcome message to the client
 
-  socket.broadcast.emit('message', formatMessage(botName, `A ${name} has joined the chat`)); //We emit to everybody except the user that is connecting
+  socket.broadcast.to(link.room).emit('message', formatMessage(botName, `${link.username} has joined the chat`)); //We emit to everybody except the user that is connecting
 });
 
   // Listen for chat messages
   socket.on('chatMessage', (msg) => {
-    io.emit('message', formatMessage('name', msg));
+    const link = getLink(socket.id);
+
+    io.to(link.room).emit('message', formatMessage(link.username, msg));
   }) 
 
   socket.on('disconnect', () => {
-    io.emit('message', formatMessage(botName, 'A user has left the chat')); //We are emmiting the message to everyone
+    const link = destroyLink(socket.id);
+
+    if (link) {
+      io.to(link.room).emit('message', formatMessage(botName, `${link.username} has left the chat`)); //We are emmiting the message to everyone
+    }
+
   }); 
 
 });//The server side comunicates with the client side
