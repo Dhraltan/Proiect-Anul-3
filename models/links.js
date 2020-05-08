@@ -25,7 +25,7 @@ function destroyLink(id) {
 
 // Get room users
 function getRoomUsers(room) {
-    return links.filter(link => link.room ===room);
+    return links.filter(link => link.room === room);
 }
 
 module.exports = {

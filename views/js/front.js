@@ -1,6 +1,7 @@
 const chatForm = document.getElementById('chat-form'); //We get the chat form from the chat.ejs
 const chatMessages = document.querySelector('.chat-messages'); //We bring in the chat messages div
-
+const roomName = document.getElementById('room-name');
+const userList = document.getElementById('users');
 const socket = io(); //
 
 //Get the room from the URL
@@ -10,6 +11,12 @@ const {room} = Qs.parse(location.search, {
 
 const name = document.getElementById("name").innerHTML.toString();
 socket.emit('joinRoom', {room,name});
+
+// Get room and users
+socket.on('roomUsers', ({room,links}) =>{
+    outputRoomName(room);
+    outputUsers(links);
+});
 
 // Message from server
 socket.on('message', message => {
@@ -34,6 +41,18 @@ chatForm.addEventListener('submit', (e) => {
     e.target.elements.msg.value = '';
     e.target.elements.msg.focus();
 });
+
+// Add room name to DOM
+function outputRoomName(room){
+    roomName.innerText = room;
+};
+
+// Add users to DOM
+function outputUsers(links) {
+    userList.innerHTML = `
+    ${links.map(link => `<li>${link.username}</li>`).join('')}
+    `;
+}
 
 // Output message to the ejs
 function outputMessage(message){

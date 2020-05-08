@@ -68,6 +68,12 @@ socket.on('joinRoom', ({room,name}) => {
   socket.emit('message', formatMessage(botName, 'Welcome to ChatApp!')); //We send a welcome message to the client
 
   socket.broadcast.to(link.room).emit('message', formatMessage(botName, `${link.username} has joined the chat`)); //We emit to everybody except the user that is connecting
+
+  //Send users and room info
+  io.to(link.room).emit('roomUsers', {
+    room: link.room,
+    links: getRoomUsers(link.room)
+  });
 });
 
   // Listen for chat messages
@@ -82,10 +88,13 @@ socket.on('joinRoom', ({room,name}) => {
 
     if (link) {
       io.to(link.room).emit('message', formatMessage(botName, `${link.username} has left the chat`)); //We are emmiting the message to everyone
+      
+      io.to(link.room).emit('roomUsers', {
+        room: link.room,
+        links: getRoomUsers(link.room)
+      });
     }
-
   }); 
-
 });//The server side comunicates with the client side
 
 // Routes
