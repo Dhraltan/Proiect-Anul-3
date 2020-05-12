@@ -103,8 +103,11 @@ app.use('/users', require('./routes/users')); //We create the users route
 
 //Set static folder
 app.use(express.static(path.join(__dirname + '/views'))); //We need this to be able to add some css
+app.use('/static', express.static(__dirname + '/views/css'));
+
 
 const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT is for deployment)
 
 server.listen(PORT, console.log(`Server started on port ${PORT}`)); //This runs a server
 
+ 

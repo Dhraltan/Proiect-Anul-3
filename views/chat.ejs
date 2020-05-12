@@ -1,8 +1,6 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3" id="name"><%= name %></p>
-<a href="/users/logout" class="btn btn-secondary">Logout</a>
 
 <head>
+  <p class="hidden" id="name"><%= name %></p>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
@@ -10,36 +8,53 @@
   <title>Chat App</title>
 </head>
 <body>
-  <div class="chat-container">
-    <header class="chat-header">
-      <h1><i class="far fa-comments"></i> ChatApp </h1>
-      <a href="/dashboard" class="btn">Leave Room</a>
-    </header>
-    <main class="chat-main">
-      <div class="chat-sidebar">
-        <h3><i class="fas fa-comments"></i> Room Name:</h3>
-        <h2 id="room-name"></h2>
-        <h3><i class="fas fa-users"></i> Users</h3>
-        <ul id="users">
-        </ul>
-        
+
+
+  
+  <div class="row mt-5 ">  <!--mt = margin-top-->
+    <div class="col-md-12 m-auto "> <!--6 column div that is pushed to the middle-->
+      <div class="card card-body text-center marime">
+        <div class="row">
+          <div class="col-12 col-md-8"><h1 class="ml-3 float-left"><i class="far fa-comments"></i> ChatApp </h1></div>
+          <div class="col-6 col-md-4">
+            <a href="/dashboard" class="btn btn-primary float-right mt-1">Leave Room</a>
+          </div>
+        </div>
+
+        <div class="row mt-4">
+          <div class="col-3">
+            <h3><i class="fas fa-comments mt-3 mb-2"></i> Room Name:</h3>
+            <h2 id="room-name"></h2>
+            <h3><i class="fas fa-users mt-5 mb-2"></i> Users</h3>
+            <ul id="users">
+            </ul></div>
+          <div class="col-9 bg-light">
+            <div class="chat-messages">
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <form id="chat-form">
+            <input
+              id="msg"
+              type="text"
+              class="form-control"
+              placeholder="Enter Message"
+              required
+              autocomplete="off"
+            />
+            <button class="btn btn-primary float-left mt-3"><i class="fas fa-paper-plane"></i> Send</button>
+            
+            <a href="/users/logout" class="btn btn-primary float-right mt-3">Logout</a>
+          </form>
+        </div>
+
       </div>
-      <div class="chat-messages">
-      </div>
-    </main>
-    <div class="chat-form-container">
-      <form id="chat-form">
-        <input
-          id="msg"
-          type="text"
-          placeholder="Enter Message"
-          required
-          autocomplete="off"
-        />
-        <button class="btn"><i class="fas fa-paper-plane"></i> Send</button>
-      </form>
-    </div>
+    </div> 
   </div>
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.4/qs.min.js" integrity="sha256-ijqLssetA1NMNjZ+w1zaUafQQLm4IW5OoM8O+4tatME=" crossorigin="anonymous"></script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="js/front.js"></script>

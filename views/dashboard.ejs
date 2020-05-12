@@ -1,6 +1,3 @@
-<h1 class="mt-4">Dashboard</h1>
-<p class="lead mb-3" id="name"><%= name %></p>
-
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,28 +12,33 @@
 		<title>ChatCord App</title>
 	</head>
 	<body>
-		<div class="join-container">
-			<header class="join-header">
-				<h1><i class="far fa-comments"></i> ChatApp </h1>
-			</header>
-			<main class="join-main">
-				<form action="/chat">
-					<div class="form-control">
-						<label for="room">Choose a Room</label>
-						<select name="room" id="room">
-							<option value="JavaScript">JavaScript</option>
-							<option value="Python">Python</option>
-							<option value="PHP">PHP</option>
-							<option value="C#">C#</option>
-							<option value="Ruby">Ruby</option>
-							<option value="Java">Java</option>
-						</select>
-					</div>
-                    <button type="submit" class="btn">Join Chat</button>
-                    <a href="/users/logout" class="btn">Logout</a>
-				</form>
-			</main>
-		</div>
+		<div class="row mt-5">  <!--mt = margin-top-->
+			<div class="col-md-6 m-auto"> <!--6 column div that is pushed to the middle-->
+			  <div class="card card-body text-center">
+				<div class="text-center">
+					<h2> Welcome to ChatApp <i class="far fa-comments"></i></h2>
+					<p class="lead" id="name"><%= name %></p>
+				  </div>
+				<main class="join-main">
+					<form action="/chat">
+						<div class="form-group mt-4">
+							<label for="room">Choose a Room</label>
+							<select name="room" class="form-control" id="room">
+								<option value="JavaScript">JavaScript</option>
+								<option value="Python">Python</option>
+								<option value="PHP">PHP</option>
+								<option value="C#">C#</option>
+								<option value="Ruby">Ruby</option>
+								<option value="Java">Java</option>
+							</select>
+						</div>
+						<button type="submit" class="btn btn-primary btn-block mt-5">Join Chat</button>
+						<a href="/users/logout" class="btn btn-secondary btn-block mt-3">Logout</a>
+					</form>
+				</main>
+			  </div>
+			</div> 
+		  </div>
     </body>
     
     
