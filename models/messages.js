@@ -8,4 +8,16 @@ function formatMessage(username, text) {
     }
 }
 
-module.exports = formatMessage;
+function formatMessage2(username, text, time){
+    return {
+        username,
+        text,
+        time
+    }
+}
+
+
+module.exports = {
+    formatMessage,
+    formatMessage2
+}

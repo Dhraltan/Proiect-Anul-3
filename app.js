@@ -7,8 +7,9 @@ const passport = require('passport'); //We bring in passport
 const path = require('path'); //This brings in a path module from noje.js
 const http = require('http'); //We need http in order to use socket.io
 const socketio = require('socket.io'); //We bring in socket.io
-const formatMessage = require('./models/messages'); // We use a format for our messages
-const { createLink, getLink, destroyLink, getRoomUsers } = require('./models/links')
+const { formatMessage, formatMessage2 } = require('./models/messages'); // We use a format for our messages
+const { createLink, getLink, destroyLink, getRoomUsers } = require('./models/links');
+const moment = require('moment'); //moment is used to get the current time
 
 const app = express(); //We initialize the app with express
 
@@ -60,12 +61,21 @@ const botName = 'ChatBot';
 
 // Run socket io when someoane connects
 io.on('connection', socket => {
+const chatDB = mongoose.connection.db.collection('chats');
 socket.on('joinRoom', ({room,name}) => {
 
   const link = createLink(socket.id, name, room);
   socket.join(link.room);
 
-  socket.emit('message', formatMessage(botName, 'Welcome to ChatApp!')); //We send a welcome message to the client
+  chatDB.find({room: link.room}).limit(50).sort({_id:1}).toArray( (err, res) => {
+    if(err){
+      throw err;
+    }
+    res.forEach((currentValue) => {
+      socket.emit('message', formatMessage2(currentValue.name, currentValue.msg, currentValue.time))})
+  });
+
+  //socket.emit('message', formatMessage(botName, `You are connected to ${link.room}`)); //We send a welcome message to the client
 
   socket.broadcast.to(link.room).emit('message', formatMessage(botName, `${link.username} has joined the chat`)); //We emit to everybody except the user that is connecting
 
@@ -79,7 +89,7 @@ socket.on('joinRoom', ({room,name}) => {
   // Listen for chat messages
   socket.on('chatMessage', (msg) => {
     const link = getLink(socket.id);
-
+    chatDB.insertOne({name: link.username, msg:msg, room: link.room, time: moment().format('h:mm a')});
     io.to(link.room).emit('message', formatMessage(link.username, msg));
   }) 
 
