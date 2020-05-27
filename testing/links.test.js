@@ -1,4 +1,4 @@
-const { createLink, getLink, destroyLink, getRoomUsers } = require('../models/links');
+const { createLink, getLink, destroyLink, getRoomUsers } = require('../models/links'); //Import funtions from the links file
 
 test('Checking if createLink is defined', () => {
     expect(createLink()).toBeDefined()
