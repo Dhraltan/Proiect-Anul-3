@@ -10,7 +10,7 @@ const socketio = require('socket.io'); //We bring in socket.io
 const { formatMessage, formatMessage2 } = require('./models/messages'); // We use a format for our messages
 const { createLink, getLink, destroyLink, getRoomUsers } = require('./models/links');
 const moment = require('moment'); //moment is used to get the current time
-
+const {logger} = require('./config/logger');
 const app = express(); //We initialize the app with express
 
 const server = http.createServer(app); //We create a server with http
@@ -119,5 +119,5 @@ app.use('/static', express.static(__dirname + '/views/css'));
 const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT is for deployment)
 
 server.listen(PORT, console.log(`Server started on port ${PORT}`)); //This runs a server
-
+logger.info('Hello log4js')
  
