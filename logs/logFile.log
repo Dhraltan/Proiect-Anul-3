@@ -1,1 +1,104 @@
 [2020-05-31T18:20:29.160] [INFO] default - Hello log4js
+[2020-05-31T18:22:44.381] [INFO] default - Hello log4js
+[2020-05-31T18:24:39.331] [INFO] default - Hello log4js
+[2020-05-31T18:26:07.484] [INFO] default - Hello
+[2020-05-31T18:26:45.124] [INFO] default - Hello
+[2020-05-31T18:27:26.447] [INFO] default - 
+[2020-06-25T18:15:17.044] [INFO] default - Hello log4js
+[2020-06-25T18:23:25.123] [INFO] default - Hello log4js
+[2020-06-25T18:24:04.226] [INFO] default - Connection to Mongo established
+[2020-06-25T18:24:04.234] [INFO] default - Server started, logger is on
+[2020-06-25T18:27:10.396] [INFO] default - Connection to Mongo established
+[2020-06-25T18:27:10.398] [ERROR] default - Connection to Mongo established
+[2020-06-25T18:27:10.404] [INFO] default - Server started, logger is on
+[2020-06-25T18:28:16.035] [INFO] default - Connection to Mongo established
+[2020-06-25T18:28:16.043] [INFO] default - Server started, logger is on
+[2020-06-25T18:30:08.807] [INFO] default - Connection to Mongo established
+[2020-06-25T18:30:08.815] [INFO] default - Server started, logger is on
+[2020-06-25T18:30:10.163] [INFO] default - User connected to the chat
+[2020-06-25T18:30:29.008] [INFO] default - User connected to the chat
+[2020-06-25T18:30:47.154] [INFO] default - Connection to Mongo established
+[2020-06-25T18:30:47.162] [INFO] default - Server started, logger is on
+[2020-06-25T18:31:03.544] [INFO] default - User connected to the chat
+[2020-06-25T18:33:05.111] [INFO] default - Connection to Mongo established
+[2020-06-25T18:33:05.120] [INFO] default - Server started, logger is on
+[2020-06-25T18:33:18.780] [INFO] default - Gheorghe Catalin-Stefan connected to room C#
+[2020-06-25T18:34:12.912] [INFO] default - Connection to Mongo established
+[2020-06-25T18:34:12.920] [INFO] default - Server started, logger is on
+[2020-06-25T18:35:52.290] [INFO] default - Connection to Mongo established
+[2020-06-25T18:35:52.298] [INFO] default - Server started, logger is on
+[2020-06-25T18:36:39.341] [INFO] default - Connection to Mongo established
+[2020-06-25T18:36:39.349] [INFO] default - Server started, logger is on
+[2020-06-25T18:36:49.626] [INFO] default - Gheorghe Catalin-Stefan connected to room JavaScript
+[2020-06-25T18:37:31.808] [INFO] default - Connection to Mongo established
+[2020-06-25T18:37:31.817] [INFO] default - Server started, logger is on
+[2020-06-25T18:38:20.970] [INFO] default - Connection to Mongo established
+[2020-06-25T18:38:20.977] [INFO] default - Server started, logger is on
+[2020-06-25T18:39:03.410] [INFO] default - Connection to Mongo established
+[2020-06-25T18:39:14.039] [INFO] default - Connection to Mongo established
+[2020-06-25T18:39:14.046] [INFO] default - Server started, logger is on
+[2020-06-25T18:39:19.897] [INFO] default - Connection to Mongo established
+[2020-06-25T18:39:19.905] [INFO] default - Server started, logger is on
+[2020-06-25T18:39:25.687] [INFO] default - Connection to Mongo established
+[2020-06-25T18:39:25.695] [INFO] default - Server started, logger is on
+[2020-06-25T18:39:45.970] [INFO] default - Connection to Mongo established
+[2020-06-25T18:39:45.978] [INFO] default - Server started, logger is on
+[2020-06-25T18:39:54.047] [INFO] default - Gheorghe Catalin-Stefan connected to room JavaScript
+[2020-06-25T18:40:19.245] [INFO] default - Connection to Mongo established
+[2020-06-25T18:40:19.254] [INFO] default - Server started, logger is on
+[2020-06-25T18:40:26.711] [INFO] default - Connection to Mongo established
+[2020-06-25T18:40:26.719] [INFO] default - Server started, logger is on
+[2020-06-25T18:40:38.107] [INFO] default - Gheorghe Catalin-Stefan connected to room Java
+[2020-06-25T18:40:41.585] [INFO] default - Test was sent
+[2020-06-25T18:41:39.739] [INFO] default - Connection to Mongo established
+[2020-06-25T18:41:39.747] [INFO] default - Server started, logger is on
+[2020-06-25T18:41:46.515] [INFO] default - Gheorghe Catalin-Stefan connected to room JavaScript
+[2020-06-25T18:41:51.799] [INFO] default - Message:"Mesaj logger" was sent to room:JavaScript
+[2020-06-25T18:42:51.787] [INFO] default - Connection to Mongo established
+[2020-06-25T18:42:51.795] [INFO] default - Server started, logger is on
+[2020-06-25T18:42:58.207] [INFO] default - "Gheorghe Catalin-Stefan" connected to room "JavaScript"
+[2020-06-25T18:43:03.520] [INFO] default - Message:"Test de format" was sent to room:"JavaScript"
+[2020-06-25T18:44:08.692] [INFO] default - Connection to Mongo established
+[2020-06-25T18:44:08.700] [INFO] default - Server started, logger is on
+[2020-06-25T18:44:16.780] [INFO] default - "Gabriel " connected to room "Ruby"
+[2020-06-25T18:44:18.975] [INFO] default - Message:"Gabriel " has disconnected from "Ruby"
+[2020-06-25T18:45:16.106] [INFO] default - Connection to Mongo established
+[2020-06-25T18:45:16.113] [INFO] default - Server started, logger is on
+[2020-06-25T18:50:18.656] [INFO] default - Connection to Mongo established
+[2020-06-25T18:50:18.664] [INFO] default - Server started, logger is on
+[2020-06-25T18:51:28.762] [INFO] default - Connection to Mongo established
+[2020-06-25T18:51:28.773] [INFO] default - Server started, logger is on
+[2020-06-25T18:51:28.985] [WARN] default - Attempted authentification with email: "mailrandom@mail"
+[2020-06-25T18:52:44.116] [INFO] default - Connection to Mongo established
+[2020-06-25T18:52:44.124] [INFO] default - Server started, logger is on
+[2020-06-25T18:52:48.888] [INFO] default - Connection to Mongo established
+[2020-06-25T18:52:48.898] [INFO] default - Server started, logger is on
+[2020-06-25T18:52:54.771] [WARN] default - Attempted authentification with incorrect password
+[2020-06-25T18:54:11.118] [INFO] default - Connection to Mongo established
+[2020-06-25T18:54:11.126] [INFO] default - Server started, logger is on
+[2020-06-25T18:54:16.845] [INFO] default - User: "{
+  _id: 5e98803c0aec5a915cab7386,
+  name: 'Gheorghe Catalin-Stefan',
+  email: 'gcatalins98@gmail.com',
+  password: '$2a$10$CKO5PF75yTqzViX1MTXqy.4YvJ9lKS/ErD8RZfJj0ailuzu7BahSW',
+  date: 2020-04-16T15:56:44.570Z,
+  __v: 0
+}" logged in
+[2020-06-25T18:54:41.628] [INFO] default - Connection to Mongo established
+[2020-06-25T18:54:41.636] [INFO] default - Server started, logger is on
+[2020-06-25T18:54:47.677] [INFO] default - User: "undefined" logged in
+[2020-06-25T18:55:05.021] [INFO] default - Connection to Mongo established
+[2020-06-25T18:55:05.028] [INFO] default - Server started, logger is on
+[2020-06-25T18:55:10.563] [INFO] default - User: "Gheorghe Catalin-Stefan" logged in
+[2020-06-25T19:24:23.537] [INFO] default - Connection to Mongo established
+[2020-06-25T19:24:23.545] [INFO] default - Server started, logger is on
+[2020-06-25T19:25:24.667] [INFO] default - Connection to Mongo established
+[2020-06-25T19:25:24.674] [INFO] default - Server started, logger is on
+[2020-06-25T19:25:27.387] [INFO] default - Connection to Mongo established
+[2020-06-25T19:25:27.395] [INFO] default - Server started, logger is on
+[2020-06-25T19:25:31.878] [WARN] default - Attempted registration without filling all fields
+[2020-06-25T19:25:31.878] [WARN] default - Attempted registration with too short password
+[2020-06-25T19:25:53.178] [WARN] default - Attempted registration with an already used email
+[2020-06-25T19:26:06.288] [WARN] default - A registration has occurred
+[2020-06-25T19:26:18.456] [INFO] default - Connection to Mongo established
+[2020-06-25T19:26:18.464] [INFO] default - Server started, logger is on

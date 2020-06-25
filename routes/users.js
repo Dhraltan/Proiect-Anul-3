@@ -2,6 +2,7 @@ const express = require('express'); //We bring in express
 const router = express.Router(); //We create router in order to use the express router
 const bcrypt = require('bcryptjs'); //Wr use it in order to encrypt the password
 const passport = require('passport'); //We need it for the login
+const {logger} = require('../config/logger');
 
 //User model
 const User = require('../models/User'); //We bring the User model we created
@@ -19,16 +20,19 @@ router.post('/register', (req, res) => {
 
     //Check required fields
     if(!name || !email || !password || !password2){
+        logger.warn(`Attempted registration without filling all fields`);
         errors.push({ msg: 'You need to fill all the fields' });
     }
 
     //Check if passwords match
     if(password!=password2) {
+        logger.warn(`Attempted registration with unmatching passwords`);
         errors.push({ msg: 'The passwords do not match' })
     }
 
     //Check password lenght
     if(password.length < 6) {
+        logger.warn(`Attempted registration with too short password`);
         errors.push({ msg: 'Password needs to be at least 6 characters' })
     }
 
@@ -55,6 +59,7 @@ router.post('/register', (req, res) => {
                         password,
                         password2
                     });
+        logger.warn(`Attempted registration with an already used email`);
                 }
                 else {
                     const newUser = new User ({
@@ -72,6 +77,7 @@ router.post('/register', (req, res) => {
                         newUser.save()  //Stores the newly created user into Mongo
                         .then(user => {
                             req.flash('succes_msg','You are now registered and loged in');
+                            logger.info(`A registration has occurred`);
                             res.redirect('login');
                         })
                         .catch(err => console.log(err));

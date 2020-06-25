@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy; //This enables us to authentificate with a username and a password
 const mongoose = require('mongoose'); //We need this to check if the email and password matches
 const bcrypt = require('bcryptjs'); //We need bcrypt to unhash the password
+const {logger} = require('./logger');
 
 //Load User Model
 const User = require('../models/User');
@@ -13,6 +14,7 @@ module.exports = function(passport) {
             User.findOne({ email: email})
                 .then(user => {
                     if(!user) {
+                        logger.warn(`Attempted authentification with email: "${email}"`);
                         return done(null, false, { message: 'That email is not registered'});
                     } // If there is no user that has that email we display a message
 
@@ -21,8 +23,10 @@ module.exports = function(passport) {
                         if(err) throw err;
 
                         if(isMatch) {
+                            logger.info(`User: "${user.name}" logged in`);
                             return done(null, user); //If we find that the passwords match we return the user
                         } else {
+                            logger.warn(`Attempted authentification with incorrect password`);
                             return done(null, false, { message: 'Password incorrect'}); //If the passwords don't match we return a message
                         }
                     });

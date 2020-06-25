@@ -24,8 +24,8 @@ const db = require('./config/keys').MongoURI; //We store the MongoDB link
 
 // Connect to Mongo
 mongoose.connect(db,{ useNewUrlParser: true, useUnifiedTopology: true  })
- .then(() => console.log('MongoDB Connected...'))
- .catch(err => console.log(err))
+ .then(() => console.log('MongoDB Connected...'), logger.info('Connection to Mongo established'))
+ .catch(err => logger.error(err))
 
 // EJS
 app.use(expressLayouts); 
@@ -63,13 +63,14 @@ const botName = 'ChatBot';
 io.on('connection', socket => {
 const chatDB = mongoose.connection.db.collection('chats');
 socket.on('joinRoom', ({room,name}) => {
-
+  logger.info(`User: "${name}" connected to room: "${room}"`);
   const link = createLink(socket.id, name, room);
   socket.join(link.room);
 
   chatDB.find({room: link.room}).limit(50).sort({_id:1}).toArray( (err, res) => {
     if(err){
-      throw err;
+      throw err,
+      logger.error(err);
     }
     res.forEach((currentValue) => {
       socket.emit('message', formatMessage2(currentValue.name, currentValue.msg, currentValue.time))})
@@ -91,6 +92,7 @@ socket.on('joinRoom', ({room,name}) => {
     const link = getLink(socket.id);
     chatDB.insertOne({name: link.username, msg:msg, room: link.room, time: moment().format('h:mm a')});
     io.to(link.room).emit('message', formatMessage(link.username, msg));
+    logger.info(`Message: "${msg}" was sent to room: "${link.room}"`);
   }) 
 
   socket.on('disconnect', () => {
@@ -98,7 +100,7 @@ socket.on('joinRoom', ({room,name}) => {
 
     if (link) {
       io.to(link.room).emit('message', formatMessage(botName, `${link.username} has left the chat`)); //We are emmiting the message to everyone
-      
+    logger.info(`User: "${link.username}" has disconnected from room: "${link.room}"`);
       io.to(link.room).emit('roomUsers', {
         room: link.room,
         links: getRoomUsers(link.room)
@@ -119,5 +121,5 @@ app.use('/static', express.static(__dirname + '/views/css'));
 const PORT = process.env.PORT || 5000; //We create a port (process.env.PORT is for deployment)
 
 server.listen(PORT, console.log(`Server started on port ${PORT}`)); //This runs a server
-logger.info('Hello log4js')
+logger.info('Server started, logger is on');
  
